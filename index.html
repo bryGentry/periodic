@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+
+  <script>
+
+function loadTable() {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {
+    buildTable(this.responseText);
+  }
+  xhttp.open("GET", "periodic-table-lookup.json");
+  xhttp.send();
+}
+
+var buildTable = function(data) {
+  console.log(data);
+}
+
+  </script>
+</body>
+</html>
