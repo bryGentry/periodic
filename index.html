@@ -8,7 +8,7 @@
 <body>
 
   <script>
-
+//kiad oeruiduc table data
 function loadTable() {
   const xhttp = new XMLHttpRequest();
   xhttp.onload = function() {
@@ -20,6 +20,8 @@ function loadTable() {
 
 var buildTable = function(data) {
   console.log(data);
+  var table = JSON.parse(data);
+  console.log(table);
 }
 
   </script>
