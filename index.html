@@ -115,6 +115,7 @@ var buildTable = function(data) {
     spacerCol.colspan = 2;
     row.appendChild(spacerCol);
     for ( var l = 0; l <= extraRows.lanthanide.length; l++) {
+      console.log(extraRows.lanthanide[l]);
       buildCells( extraRows.lanthanide[l]);
     }
     table.appendChild(row);
