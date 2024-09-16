@@ -4,12 +4,23 @@
   <meta charset="utf-8">
   <title></title>
 <style>
+
+  td {
+    width:100px;
+    height:100px;
+  }
   .filled {
     border:1px solid black;
   }
   .empty {
     border:0px;
   }
+.symbol {
+  font-size:30px;
+  font-weight:bold;
+  font-family: Arial;
+}
+  
 </style>
 </head>
 <body>
@@ -61,7 +72,7 @@ var buildTable = function(data) {
         }
         var td = document.createElement('td');
         td.classList = 'filled';
-        td.innerHTML = tableData[list[i]].symbol;
+        td.innerHTML = '<p class="symbol">' + tableData[list[i]].symbol + '</p>';
         row.appendChild(td);
         group++
 
