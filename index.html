@@ -31,17 +31,8 @@
   </table>
   
   <script>
+  var row;
 
-  function loadTable() {
-  const xhttp = new XMLHttpRequest();
-  xhttp.onload = function() {
-    buildTable(this.responseText);
-  }
-  xhttp.open("GET", "periodic-table-lookup.json");
-  xhttp.send();
-}
-
-var buildTable = function(data) {
   var table = document.getElementById("table");
 table.addEventListener('click', (ev) => {
     const [x, y] = [
@@ -51,43 +42,80 @@ table.addEventListener('click', (ev) => {
     console.log(x, y);
   });
 
-  
-  console.log(data);
-  var tableData = JSON.parse(data);
-  console.log(tableData);
-  if ( tableData.order && Array.isArray(tableData.order) ) {
-    var list = tableData.order;
-    var period = 1;
-    var group = 1;
-    var row = document.createElement('tr');
+    
+  function loadTable() {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {
+    buildTable(this.responseText);
+  }
+  xhttp.open("GET", "periodic-table-lookup.json");
+  xhttp.send();
+}
 
-    for (var i = 0; i < list.length; i ++ ) {
-          if ( tableData[ list[i] ].category !== "lanthanide" && tableData[ list[i] ].category !== "actinide" ) { 
+var buildCells = function( element ) {
 
-      //if we need to move to the next row
-      if ( period !== tableData[ list[i] ].period ) {
+        //if we need to move to the next row
+      if ( period !== element.period ) {
          table.appendChild(row);
          row = document.createElement('tr');
          period ++;
          group=1;
        } // end if we need to move to the next row
       
-        while (group !== tableData[list[i]].group) {
+        while (group !== element.group) {
           var td = document.createElement('td');
           td.classList = 'empty';
           row.appendChild(td);
           group++;
         }
         var td = document.createElement('td');
-        td.classList = 'filled';
-       // td.innerHTML = '<p class="symbol">' + tableData[list[i]].symbol + '</p>';
-        td.dataset.period = tableData[ list[i] ].period;
-        td.dataset.group = tableData[ list[i] ].period;
+        td.classList = 'filled hidden';
+        td.innerHTML = '<p class="symbol">' + element.symbol + '</p>';
+        td.dataset.period = element.period;
+        td.dataset.group = element.period;
         row.appendChild(td);
         group++
+  
+}
+    
+var buildTable = function(data) {
+  var tableData = JSON.parse(data);
+  var extraRows = {
+    lanthanide : [],
+    actinide : []
+  }
+
+  console.log(tableData);
+  if ( tableData.order && Array.isArray(tableData.order) ) {
+    var list = tableData.order;
+    var period = 1;
+    var group = 1;
+   row = document.createElement('tr');
+
+    for (var i = 0; i < list.length; i ++ ) {
+          if ( tableData[ list[i] ].category !== "lanthanide" && tableData[ list[i] ].category !== "actinide" ) { 
+
+          buildCells( tableData[ list[i] );
             
     }//end what we only do for the elements that we want at this time
-       } // end the loop that we do for each element 
+      else {
+      //put all the lanthanides into an array, and all actinides into an array to display later
+        extraRows[ tableData[ list[i] ].category ].push( tableData[ list[i]]);
+      }
+       } // end the loop that we do for each element. Now loop through the lanthanides and actinides.
+
+    var spacerRow = document.createElement('tr');
+    table.appendChild( spacerRow);
+    row = document.createElement('tr');
+    for ( var l = 0; l <= extraRows.lanthanide.length; l++) {
+      buildCells( extraRows.lanthanide[l]);
+    }
+    table.appendChild(row);
+    row = document.createElement('tr');
+    for ( var l = 0; l <= extraRows.lanthanide.length; l++) {
+      buildCells( extraRows.lanthanide[l]);
+    }
+        table.appendChild(row);
       
   } else {
     console.log('Problem getting data.');
