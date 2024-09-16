@@ -120,7 +120,9 @@ var buildTable = function(data) {
     }
     table.appendChild(row);
     row = document.createElement('tr');
-        row.appendChild(spacerCol);
+    var spacerColA = document.createElement('td');
+    spacerColA.colSpan = 2;
+        row.appendChild( spacerColA );
 
     for ( var l = 0; l < extraRows.actinide.length; l++) {
       buildCells( extraRows.actinide[l]);
