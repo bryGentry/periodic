@@ -3,10 +3,22 @@
 <head>
   <meta charset="utf-8">
   <title></title>
- 
+<style>
+  .filled {
+    border:1px solid black;
+  }
+  .empty {
+    border:0px;
+  }
+</style>
 </head>
 <body>
 
+  <table id="table">
+    <tbody>
+    </tbody>
+  </table>
+  
   <script>
 
   function loadTable() {
@@ -19,9 +31,46 @@
 }
 
 var buildTable = function(data) {
+  var table = document.getElementById("table");
+  
   console.log(data);
-  var table = JSON.parse(data);
-  console.log(table);
+  var tableData = JSON.parse(data);
+  console.log(tableData);
+  if ( tableData.order && Array.isArray(tableData.order) ) {
+    var list = tableData.order;
+    var period = 1;
+    var group = 1;
+    var row = document.createElement('tr');
+
+    for (var i = 0; i < list.length; i ++ ) {
+          if ( tableData[ list[i] ].category !== "lanthanide" && tableData[ list[i] ].category !== "actinide" ) { 
+
+      //if we need to move to the next row
+      if ( period !== tableData[ list[i] ].period ) {
+         table.appendChild(row);
+         row = document.createElement('tr');
+         period ++;
+         group=1;
+       } // end if we need to move to the next row
+      
+        while (group !== tableData[list[i]].group) {
+          var td = document.createElement('td');
+          td.classList = 'empty';
+          row.appendChild(td);
+          group++;
+        }
+        var td = document.createElement('td');
+        td.classList = 'filled';
+        td.innerHTML = tableData[list[i]].symbol;
+        row.appendChild(td);
+        group++
+
+    }//end what we only do for the elements that we want at this time
+       } // end the loop that we do for each element 
+      
+  } else {
+    console.log('Problem getting data.');
+  }
 }
 
 loadTable();
