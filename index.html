@@ -79,8 +79,9 @@ var buildTable = function(data) {
     group = 1;
    row = document.createElement('tr');
 
-    element = tableData[ list[i] ];
     for (var i = 0; i < list.length; i ++ ) {
+          element = tableData[ list[i] ];
+
           if ( element.category !== "lanthanide" && element.category !== "actinide" ) { 
         
       //if we need to move to the next row
