@@ -43,6 +43,14 @@
 
 var buildTable = function(data) {
   var table = document.getElementById("table");
+table.addEventListener('click', (ev) => {
+    const [x, y] = [
+      ev.target.cellIndex, 
+      ev.target.parentElement.rowIndex
+    ];
+    console.log(x, y);
+  });
+
   
   console.log(data);
   var tableData = JSON.parse(data);
@@ -73,9 +81,11 @@ var buildTable = function(data) {
         var td = document.createElement('td');
         td.classList = 'filled';
         td.innerHTML = '<p class="symbol">' + tableData[list[i]].symbol + '</p>';
+        td.dataset.period = tableData[ list[i] ].period;
+        td.dataset.group = tableData[ list[i] ].period;
         row.appendChild(td);
         group++
-
+            
     }//end what we only do for the elements that we want at this time
        } // end the loop that we do for each element 
       
