@@ -109,10 +109,11 @@ var buildTable = function(data) {
        } // end the loop that we do for each element. Now loop through the lanthanides and actinides.
 
     var spacerRow = document.createElement('tr');
+    spacerRow.innerHTML = "<td class='empty'></td>";
     table.appendChild( spacerRow);
     row = document.createElement('tr');
     var spacerCol = document.createElement('td');
-    spacerCol.colspan = 2;
+    spacerCol.colSpan = 2;
     row.appendChild(spacerCol);
     for ( var l = 0; l < extraRows.lanthanide.length; l++) {
       buildCells( extraRows.lanthanide[l]);
