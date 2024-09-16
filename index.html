@@ -32,7 +32,8 @@
   
   <script>
   var row;
-
+  var period;
+    var group;
   var table = document.getElementById("table");
 table.addEventListener('click', (ev) => {
     const [x, y] = [
@@ -88,8 +89,8 @@ var buildTable = function(data) {
   console.log(tableData);
   if ( tableData.order && Array.isArray(tableData.order) ) {
     var list = tableData.order;
-    var period = 1;
-    var group = 1;
+    period = 1;
+    group = 1;
    row = document.createElement('tr');
 
     for (var i = 0; i < list.length; i ++ ) {
