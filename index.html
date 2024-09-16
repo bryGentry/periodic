@@ -114,16 +114,16 @@ var buildTable = function(data) {
     var spacerCol = document.createElement('td');
     spacerCol.colspan = 2;
     row.appendChild(spacerCol);
-    for ( var l = 0; l <= extraRows.lanthanide.length; l++) {
+    for ( var l = 0; l < extraRows.lanthanide.length; l++) {
       buildCells( extraRows.lanthanide[l]);
     }
     table.appendChild(row);
     row = document.createElement('tr');
         row.appendChild(spacerCol);
 
-    /*for ( var l = 0; l <= extraRows.actinide.length; l++) {
+    for ( var l = 0; l < extraRows.actinide.length; l++) {
       buildCells( extraRows.actinide[l]);
-    }*/
+    }
         table.appendChild(row);
       
   } else {
