@@ -43,7 +43,11 @@
   var period;
     var group;
   var table = document.getElementById("table");
-table.addEventListener('click', (ev) => {
+var timer;
+    
+    
+    
+    table.addEventListener('click', (ev) => {
     const [x, y] = [
       ev.target.cellIndex, 
       ev.target.parentElement.rowIndex
@@ -143,6 +147,8 @@ var buildTable = function(data) {
   }
 }
 
+
+    
 loadTable();
     
   </script>
