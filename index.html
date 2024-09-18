@@ -246,7 +246,7 @@ var newTarget = function() {
       ev.target.parentElement.rowIndex
     ];
     
-    if (Math.abs( x - document.getElementById('#' + targetElement.name ).cellIndex ) <=3 && Math.abs( y - document.getElementById( '#' + targetElement.name ).parentElement.rowIndex) <=3 ) {
+    if (Math.abs( x - document.getElementById(targetElement.element.name ).cellIndex ) <=3 && Math.abs( y - document.getElementById( targetElement.element.name ).parentElement.rowIndex) <=3 ) {
       document.getElementById( targetElement.name ).classList = "filled";
       score += 500 - Math.floor(shots*100) - ( (Date.now() - targetTime) / 1000);
       updateScore();
