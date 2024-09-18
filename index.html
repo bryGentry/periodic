@@ -111,11 +111,11 @@ var timer;
     var targetElement = {};
     var shots =0;
     var targetTime;
-    var score;
+    var score = 0;
     
 
     
-  function loadTable() {
+  function loadTable() {=
   const xhttp = new XMLHttpRequest();
   xhttp.onload = function() {
     buildTable(this.responseText);
