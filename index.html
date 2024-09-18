@@ -41,7 +41,8 @@
     position:absolute;
     top:50%;
     left:50%;
-    transform: translateX(-50%) translatey(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
     font-size:30px;
     font-weight:bold;
     font-family:Arial;
@@ -54,6 +55,7 @@
     left:50%;
     font-size:15px;
     margin:0px;
+    -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
   }
   
@@ -85,12 +87,12 @@
 </head>
 <body>
 <div id="gameDisplay">
-  <p id="timer">Time:</p>
-  <p id="scoreBoard">Score:</p>
+  <p>Time: <span id="timer"></span></p>
+  <p>Score: <span id="scoreBoard"></span></p>
   <div id="targetElement">
-    <p id="targetNumber">1</p>
-    <p id="targetSymbol">He</p>
-    <p id="targetName">Helium</p>
+    <p id="targetNumber"></p>
+    <p id="targetSymbol"></p>
+    <p id="targetName"></p>
   </div>
 </div>
   <table id="table">
@@ -106,15 +108,10 @@
 var timer;
     var list;
     var tabledata;
+    var targetElement = {};
+    var shots =0;
+    var targetTime;
     
-    
-    table.addEventListener('click', (ev) => {
-    const [x, y] = [
-      ev.target.cellIndex, 
-      ev.target.parentElement.rowIndex
-    ];
-    console.log(x, y);
-  });
 
     
   function loadTable() {
@@ -214,8 +211,8 @@ var chooseRandomElement = function() {
   el = {
     index: random,
     element: tableData[ list[random] ],
-    col: document.getElementById( tableData[ list[random] ] ).cellIndex,
-    row: document.getElementById( tableData[ list[random] ] ).parentElement.rowIndex
+    x: document.getElementById( tableData[ list[random] ] ).cellIndex,
+    y: document.getElementById( tableData[ list[random] ] ).parentElement.rowIndex
   }
   return el;
 }
@@ -227,7 +224,44 @@ var displayTarget = function( el ) {
   document.getElementById("targetElement").style.backgroundColor= "#"+el.element['cpk-hex'];
 }
 
+var newTarget = function() {
+  targetElement = chooseRandomElement();
+  displayTarget( targetElement );
+  targetTime = Date.now();
+  document.getElementById("timer") = "0.00";
+}
+    var updateScore = function() {
+      document.getElementById('scoreBoard').innerText = score;
+    }
 
+    var updateTimer() = function {
+      document.getElementById( 'timer' ).innerText = Math.floor( (Date.now() - targetTime) / 1000);
+    }
+    
+  table.addEventListener('click', (ev) => {
+    var [x, y] = [
+      ev.target.cellIndex, 
+      ev.target.parentElement.rowIndex
+    ];
+    if (Math.abs( x - targetElement.x ) <=3 && Math.abs( y- targetElement.y) <=3 ) {
+      document.getElementById( targetElement.name ).classList = "filled";
+      score += 500 - Math.floor(shots*100) - ( (Date.now() - targetTime) / 1000);
+      updateScore();
+      shots=0;
+      newTarget();
+    } else {
+      shots++;
+      updateTimer();
+      if (shots > 3 ) {
+        document.getElementById( targetElement.name ).classList = "filled";
+        score -=100;
+        updateScore();
+        newTarget();
+      }
+      
+    }
+    
+  });
     
     
 loadTable();
