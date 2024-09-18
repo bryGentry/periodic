@@ -104,7 +104,8 @@
     var group;
   var table = document.getElementById("table");
 var timer;
-    
+    var list;
+    var tabledata;
     
     
     table.addEventListener('click', (ev) => {
@@ -138,7 +139,7 @@ var buildCells = function( element ) {
 }
     
 var buildTable = function(data) {
-  var tableData = JSON.parse(data);
+ tableData = JSON.parse(data);
   var extraRows = {
     lanthanide : [],
     actinide : []
@@ -146,7 +147,7 @@ var buildTable = function(data) {
 
   console.log(tableData);
   if ( tableData.order && Array.isArray(tableData.order) ) {
-    var list = tableData.order;
+    list = tableData.order;
     period = 1;
     group = 1;
    row = document.createElement('tr');
@@ -207,7 +208,23 @@ var buildTable = function(data) {
   }
 }
 
+var chooseRandomElement = function() {
+  var random = Math.floor( Math.random() * list.length );
+  obj = {
+    index: random,
+    element: tableData[ list[random] ];
+  }
+  return obj;
+}
 
+var displayTarget = function( element ) {
+  document.getElementById("targetSymbol").innerText = element.symbol;
+  document.getElementById("targetName").innerText = element.name;
+  document.getElementById("targetNumber").innerText = element.number;
+}
+
+
+    
     
 loadTable();
     
