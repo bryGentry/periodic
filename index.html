@@ -239,11 +239,9 @@ var newTarget = function() {
     }
 
     var updateTimer = function() {
-      var elapsed = Date.now() - targetTime;
-      var mins = Math.floor( elapsed / 60000 );
-      var sec = Math.floor( ( elapsed % 60 ) / 1000 );
+      var elapsed = Math.floor((Date.now() - targetTime) / 1000 );
       console.log(elapsed, mins, sec);
-      document.getElementById( 'timer' ).innerText = mins.toString() + ":" + sec.toString();
+      document.getElementById( 'timer' ).innerText = elapsed;
     }
 
     var updateShots = function() {
