@@ -259,6 +259,7 @@ var newTarget = function() {
       if (shots > 3 ) {
         document.getElementById( targetElement.element.name ).classList = "filled";
         score -=100;
+        shots=0;
         updateScore();
         newTarget();
       }
