@@ -242,6 +242,7 @@ var newTarget = function() {
       var elapsed = Date.now() - targetTime;
       var mins = Math.floor( elapsed / 60000 );
       var sec = Math.floor( ( elapsed % 60 ) / 1000 );
+      console.log(elapsed, mins, sec);
       document.getElementById( 'timer' ).innerText = mins.toString() + ":" + sec.toString();
     }
 
