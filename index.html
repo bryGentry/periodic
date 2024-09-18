@@ -89,6 +89,7 @@
 <div id="gameDisplay">
   <p>Time: <span id="timer"></span></p>
   <p>Score: <span id="scoreBoard"></span></p>
+  <p>Shots: <span id="shots"></span></p>
   <div id="targetElement">
     <p id="targetNumber"></p>
     <p id="targetSymbol"></p>
@@ -238,8 +239,18 @@ var newTarget = function() {
     }
 
     var updateTimer = function() {
-      document.getElementById( 'timer' ).innerText = Math.floor( (Date.now() - targetTime) / 1000);
+      var elapsed = Date.now() - targetTime;
+      var mins = Math.floor( elapsed / 60000 );
+      var sec = Math.floor( ( elapsed % 60 ) / 1000 );
+      document.getElementById( 'timer' ).innerText = mins.toString() + ":" + sec.toString();
     }
+
+    var updateShots = function() {
+      document.getElementById('shots').innerText = shots;
+
+    }
+
+var updateInterval = setInterval( updateTimer, 1000 );
     
   table.addEventListener('click', (ev) => {
     var [x, y] = [
@@ -253,15 +264,18 @@ var newTarget = function() {
       updateScore();
       shots=0;
       newTarget();
+      updateShots();
     } else {
       shots++;
       updateTimer();
-      if (shots > 3 ) {
+      updateShots();
+      if (shots >= 3 ) {
         document.getElementById( targetElement.element.name ).classList = "filled";
         score -=100;
         shots=0;
         updateScore();
         newTarget();
+        updateShots();
       }
       
     }
