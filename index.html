@@ -133,6 +133,7 @@ var buildCells = function( element ) {
         td.innerHTML = '<p class="symbol">' + element.symbol + '</p>';
         td.dataset.period = element.period;
         td.dataset.group = element.period;
+        td.id = element.name;
         row.appendChild(td);
         group++
   
