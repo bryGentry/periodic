@@ -230,7 +230,7 @@ var newTarget = function() {
   targetElement = chooseRandomElement();
   displayTarget( targetElement );
   targetTime = Date.now();
-  document.getElementById("timer") = "0.00";
+  document.getElementById("timer").innerText = "0.00";
 }
     var updateScore = function() {
       document.getElementById('scoreBoard').innerText = score;
