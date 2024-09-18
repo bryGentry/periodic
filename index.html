@@ -211,18 +211,20 @@ var buildTable = function(data) {
 
 var chooseRandomElement = function() {
   var random = Math.floor( Math.random() * list.length );
-  obj = {
+  el = {
     index: random,
-    element: tableData[ list[random] ]
+    element: tableData[ list[random] ],
+    col: document.getElementById( tableData[ list[random] ] ).cellIndex,
+    row: document.getElementById( tableData[ list[random] ] ).parentElement.rowIndex
   }
-  return obj;
+  return el;
 }
 
-var displayTarget = function( element ) {
-  document.getElementById("targetSymbol").innerText = element.symbol;
-  document.getElementById("targetName").innerText = element.name;
-  document.getElementById("targetNumber").innerText = element.number;
-  document.getElementById("targetElement").style.backgroundColor= "#"+element['cpk-hex'];
+var displayTarget = function( el ) {
+  document.getElementById("targetSymbol").innerText = el.element.symbol;
+  document.getElementById("targetName").innerText = el.element.name;
+  document.getElementById("targetNumber").innerText = el.element.number;
+  document.getElementById("targetElement").style.backgroundColor= "#"+el.element['cpk-hex'];
 }
 
 
