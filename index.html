@@ -238,9 +238,15 @@ var newTarget = function() {
       document.getElementById('scoreBoard').innerText = score;
     }
 
+function millisToMinutesAndSeconds(millis) {
+  var minutes = Math.floor(millis / 60000);
+  var seconds = ((millis % 60000) / 1000).toFixed(0);
+  return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+}
+    
     var updateTimer = function() {
-      var elapsed = Math.floor((Date.now() - targetTime) / 1000 );
-      document.getElementById( 'timer' ).innerText = elapsed;
+      var timeDisplay = millisToMinutesAndSeconds( Date.now() - targetTime );
+      document.getElementById( 'timer' ).innerText = timeDisplay;
     }
 
     var updateShots = function() {
