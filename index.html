@@ -174,7 +174,6 @@ var buildTable = function(data) {
     actinide : []
   }
 
-  console.log(tableData);
   if ( tableData.order && Array.isArray(tableData.order) ) {
     list = tableData.order;
     period = 1;
@@ -185,9 +184,14 @@ var buildTable = function(data) {
           element = tableData[ list[i] ];
 
           if ( element.category !== "lanthanide" && element.category !== "actinide" ) { 
-        
+        if ( element.name=="Ununennium" ) {
+          console.log("Ununennium now");
+        }
       //if we need to move to the next row
           if ( period !== element.period ) {
+         if ( element.name=="Ununennium" ) {
+          console.log("need to move to the next row cuz right now we're on period " + period + "and we need to be on " + element.period);
+        }   
              table.appendChild(row);
              row = document.createElement('tr');
              period ++;
