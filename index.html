@@ -308,9 +308,15 @@ var updateInterval = setInterval( updateTimer, 1000 );
         score -=100;
         shots=0;
               tableData[list].splice(el.index,1);
+        if ( tableData.list.length > 0 ) {
+          
         updateScore();
         newTarget();
         updateShots();
+                  } else {
+          alert('all done!');
+                  }
+
       }
       
     }
