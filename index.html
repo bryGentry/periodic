@@ -296,6 +296,7 @@ var updateInterval = setInterval( updateTimer, 1000 );
       score += 500 - Math.floor(shots*100) - ( (Date.now() - targetTime) / 1000 );
       updateScore();
       shots=0;
+      tableData[list].splice(el.index,1);
       newTarget();
       updateShots();
     } else {
@@ -306,6 +307,7 @@ var updateInterval = setInterval( updateTimer, 1000 );
         document.getElementById( targetElement.element.name ).classList = "filled";
         score -=100;
         shots=0;
+              tableData[list].splice(el.index,1);
         updateScore();
         newTarget();
         updateShots();
