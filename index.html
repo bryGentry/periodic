@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Periodic Table Racing Game</title>
 <style>
 
   #gameDisplay {
@@ -113,6 +114,34 @@ var timer;
     var shots =0;
     var targetTime;
     var score = 0;
+    var accuracyLimit = 2;
+
+    var difficulties = {
+      easy: {
+        accuracyLimit : 3,
+        timeDiscount : 3,
+        maxTurns : 4,
+        pointBase : 100
+      },
+      moderate: {
+        accuracyLimit : 2,
+        timeDiscount : 2,
+        maxTurns : 3,
+        pointBase : 200
+      },
+      difficult : {
+        accuracyLimit : 1,
+        timeDiscount : 2,
+        maxTurns : 3,
+        pointBase : 300
+      },
+      impossible : {
+        accuracyLimit : 0,
+        timeDiscount : 1,
+        maxTurns : 3,
+        pointBase : 300
+      }
+    }
     
 
     
@@ -262,7 +291,7 @@ var updateInterval = setInterval( updateTimer, 1000 );
       ev.target.parentElement.rowIndex
     ];
     
-    if (Math.abs( x - document.getElementById(targetElement.element.name ).cellIndex ) <=3 && Math.abs( y - document.getElementById( targetElement.element.name ).parentElement.rowIndex) <=3 ) {
+    if (Math.abs( x - document.getElementById(targetElement.element.name ).cellIndex ) <= accuracyLimit && Math.abs( y - document.getElementById( targetElement.element.name ).parentElement.rowIndex) <= accuracyLimit ) {
       document.getElementById( targetElement.element.name ).classList = "filled";
       score += 500 - Math.floor(shots*100) - ( (Date.now() - targetTime) / 1000);
       updateScore();
