@@ -199,6 +199,9 @@ var buildTable = function(data) {
            } // end if we need to move to the next row
           
             while (group !== element.group) {
+              if ( element.name=="Ununennium" ) {
+          console.log("need to move to the next gropu cuz right now we're on group " + group + "and we need to be on " + element.group);
+        } 
               var td = document.createElement('td');
               td.classList = 'empty';
               row.appendChild(td);
