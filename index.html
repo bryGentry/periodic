@@ -296,12 +296,13 @@ var updateInterval = setInterval( updateTimer, 1000 );
 
     var continueGameOrEnd = function() {
         shots=0;
-        tableData.order.splice( tableData.order.indexOf(targetElement.element.name),1);
+        tableData.order.splice( el.index, 1);
         if ( tableData.order.length > 0 ) {
           
         updateScore();
         newTarget();
         updateShots();
+          console.log( tableData.order.length);
                   } else {
           alert('all done!');
                   }
