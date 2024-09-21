@@ -155,7 +155,10 @@ var difficulty = difficulties.moderate;
 }
 
 var buildCells = function( element ) {
-
+   if ( element.name=="Ununennium" ) {
+     console.log (element,'there it is');
+   }
+  
         var td = document.createElement('td');
         td.classList = 'filled hidden';
         td.innerHTML = '<p class="symbol">' + element.symbol + '</p>';
@@ -207,9 +210,14 @@ var buildTable = function(data) {
               row.appendChild(td);
               group++;
             }
-            
+
+            if ( element.name=="Ununennium" ) {
+          console.log("about to build the cell for " + element.name );
+              buildCells ( element);
+        } 
+            else {
           buildCells( element );
-            
+            }
     }//end what we only do for the elements that we want at this time
       else {
       //put all the lanthanides into an array, and all actinides into an array to display later
