@@ -184,7 +184,8 @@ var buildTable = function(data) {
           element = tableData[ list[i] ];
 
           if ( element.category !== "lanthanide" && element.category !== "actinide" ) { 
-        
+
+                        if ( element.name!=="Ununennium" ) {
       //if we need to move to the next row
           if ( period !== element.period ) {
             
@@ -202,8 +203,11 @@ var buildTable = function(data) {
               group++;
             }
 
-            if ( element.name!=="Ununennium" ) {
+
               buildCells ( element);
+        } else {
+            //get rid of "Ununennium"; it's hypothetical
+            tableData.order.splice(i,1);
         } 
     }//end what we only do for the elements that we want at this time
       else {
