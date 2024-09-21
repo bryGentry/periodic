@@ -155,9 +155,6 @@ var difficulty = difficulties.moderate;
 }
 
 var buildCells = function( element ) {
-   if ( element.name=="Ununennium" ) {
-     console.log (element,'there it is');
-   }
   
         var td = document.createElement('td');
         td.classList = 'filled hidden';
@@ -167,10 +164,6 @@ var buildCells = function( element ) {
         td.id = element.name;
         row.appendChild(td);
         group++
-     if ( element.name=="Ununennium" ) {
-      console.log('cell',td);
-       console.log('row',row);
-     }
   
 }
     
@@ -191,14 +184,10 @@ var buildTable = function(data) {
           element = tableData[ list[i] ];
 
           if ( element.category !== "lanthanide" && element.category !== "actinide" ) { 
-        if ( element.name=="Ununennium" ) {
-          console.log("Ununennium now");
-        }
+        
       //if we need to move to the next row
           if ( period !== element.period ) {
-         if ( element.name=="Ununennium" ) {
-          console.log("need to move to the next row cuz right now we're on period " + period + "and we need to be on " + element.period);
-        }   
+            
              table.appendChild(row);
              row = document.createElement('tr');
              period ++;
@@ -206,22 +195,16 @@ var buildTable = function(data) {
            } // end if we need to move to the next row
           
             while (group !== element.group) {
-              if ( element.name=="Ununennium" ) {
-          console.log("need to move to the next gropu cuz right now we're on group " + group + "and we need to be on " + element.group);
-        } 
+          
               var td = document.createElement('td');
               td.classList = 'empty';
               row.appendChild(td);
               group++;
             }
 
-            if ( element.name=="Ununennium" ) {
-          console.log("about to build the cell for " + element.name );
+            if ( element.name!=="Ununennium" ) {
               buildCells ( element);
         } 
-            else {
-          buildCells( element );
-            }
     }//end what we only do for the elements that we want at this time
       else {
       //put all the lanthanides into an array, and all actinides into an array to display later
