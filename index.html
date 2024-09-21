@@ -114,6 +114,7 @@ var timer;
     var shots =0;
     var targetTime;
     var score = 0;
+    var el;
 
 
     var difficulties = {
@@ -291,6 +292,20 @@ function millisToMinutesAndSeconds(millis) {
     }
 
 var updateInterval = setInterval( updateTimer, 1000 );
+
+
+    var continueGameOrEnd = function() {
+        shots=0;
+        tableData.order.splice( tableData.order.indexOf(targetElement.element.name),1);
+        if ( tableData.order.length > 0 ) {
+          
+        updateScore();
+        newTarget();
+        updateShots();
+                  } else {
+          alert('all done!');
+                  }
+    }
     
   table.addEventListener('click', (ev) => {
     var [x, y] = [
@@ -302,10 +317,8 @@ var updateInterval = setInterval( updateTimer, 1000 );
       document.getElementById( targetElement.element.name ).classList = "filled";
       score += 500 - Math.floor(shots*100) - ( (Date.now() - targetTime) / 1000 );
       updateScore();
-      shots=0;
-      tableData.order.splice(el.index,1);
-      newTarget();
-      updateShots();
+    continueGameOrEnd();
+
     } else {
       shots++;
       updateTimer();
@@ -313,16 +326,8 @@ var updateInterval = setInterval( updateTimer, 1000 );
       if (shots >= difficulty.maxShots ) {
         document.getElementById( targetElement.element.name ).classList = "filled";
         score -=100;
-        shots=0;
-              tableData.order.splice(el.index,1);
-        if ( tableData.order.length > 0 ) {
-          
         updateScore();
-        newTarget();
-        updateShots();
-                  } else {
-          alert('all done!');
-                  }
+        continueGameOrEnd();
 
       }
       
