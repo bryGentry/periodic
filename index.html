@@ -316,7 +316,7 @@ var updateInterval = setInterval( updateTimer, 1000 );
     
     if (Math.abs( x - document.getElementById(targetElement.element.name ).cellIndex ) <= difficulty.accuracyLimit && Math.abs( y - document.getElementById( targetElement.element.name ).parentElement.rowIndex) <= difficulty.accuracyLimit ) {
       document.getElementById( targetElement.element.name ).classList = "filled";
-      score += 500 - Math.floor(shots*100) - ( (Date.now() - targetTime) / 1000 );
+      score += 500 - Math.floor( (shots*100) - ( (Date.now() - targetTime) / 1000 ) );
       updateScore();
     continueGameOrEnd();
 
