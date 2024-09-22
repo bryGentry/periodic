@@ -220,20 +220,20 @@ var buildTable = function(data) {
 
     var spacerRow = document.createElement('tr');
     spacerRow.classList="spacer";
-    spacerRow.innerHTML = "<td class='empty spacer'></td>";
+    spacerRow.innerHTML = "<td class='empty spacer'></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>";
     table.appendChild( spacerRow);
     row = document.createElement('tr');
-    row.HTMLcontent = "<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>";
      //   row.appendChild(spacerCol);
     for ( var l = 0; l < extraRows.lanthanide.length; l++) {
       buildCells( extraRows.lanthanide[l]);
     }
     table.appendChild(row);
     row = document.createElement('tr');
-    var spacerColA = document.createElement('td');
+  /*  var spacerColA = document.createElement('td');
     spacerColA.colSpan = 2;
         row.appendChild( spacerColA );
-
+*/
+    row.innerHTML
     for ( var l = 0; l < extraRows.actinide.length; l++) {
       buildCells( extraRows.actinide[l]);
     }
